@@ -1,0 +1,66 @@
+{
+  "skill_name": "go-katmanli",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Küçük bir stok takip API'si yaz: ürünler (ad, sku, adet, fiyat) için CRUD. SQLite kullan, modül github.com/kadir/stok, proje ./stok dizinine.",
+      "expected_output": "Derlenen, katmanlı (handler/service/repository/domain) Go projesi; .env tabanlı config; gömülü migration; Makefile.",
+      "files": [],
+      "assertions": [
+        "go build ./... passes",
+        "go vet ./... passes",
+        "Layered packages exist: internal/handler, internal/service, internal/repository, internal/domain",
+        "SQL statements appear only under internal/repository (no 'database/sql' or SQL text in handler/service)",
+        "No net/http usage inside internal/service or internal/repository",
+        "Config is read from .env + prefixed env vars via internal/config (no os.Getenv outside internal/config)",
+        "Migrations are .sql files under internal/repository/migrations and are embedded (go:embed)",
+        "Makefile exists with build and release (cross-compile) targets",
+        "Comments are in Turkish, identifiers in English",
+        "Uses a pure-Go SQLite driver (modernc.org/sqlite), not CGO mattn/go-sqlite3",
+        "Products table has name, sku, quantity, price columns and full CRUD endpoints (list/get/create/update/delete)",
+        "Unique SKU conflict handled via repository.IsUniqueViolation (no driver-specific error type import, no pgconn)"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Bu projeye tedarikçi (supplier) tablosu ve endpoint'leri ekle: ad, e-posta, telefon. Listeleme ve ekleme yeterli.",
+      "expected_output": "Yeni migration + domain + repository + service + handler dosyaları, kayıtlar yapılmış, proje derleniyor.",
+      "files": [
+        "inputs/envanter"
+      ],
+      "assertions": [
+        "go build ./... passes",
+        "go vet ./... passes",
+        "New migration file 0002_*.sql added under internal/repository/migrations/postgres (0001 unchanged)",
+        "New files internal/domain/supplier.go, internal/repository/supplier.go, internal/service/supplier.go, internal/handler/supplier.go",
+        "SupplierRepo registered in repository/repos.go and Suppliers service registered in service/service.go",
+        "Routes for GET and POST /api/v1/suppliers registered in handler/server.go routes()",
+        "Repository queries use ? placeholders passed through db.Rebind",
+        "Email validated in domain Input.Validate() and returns ValidationError (400)",
+        "Existing scaffold conventions preserved (no new router/ORM/config dependency added)"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Postgres kullanan bir kısa link servisi yaz, ./kisalt dizinine, modül github.com/kadir/kisalt. POST /links kısa kod üretsin, GET /{code} yönlendirsin, tıklama sayısı tutulsun.",
+      "expected_output": "Derlenen katmanlı Go projesi; postgres:// DATABASE_URL; redirect handler; tıklama sayacı repository'de.",
+      "files": [],
+      "assertions": [
+        "go build ./... passes",
+        "go vet ./... passes",
+        "Layered packages exist: internal/handler, internal/service, internal/repository, internal/domain",
+        "SQL statements appear only under internal/repository (no 'database/sql' or SQL text in handler/service)",
+        "No net/http usage inside internal/service or internal/repository",
+        "Config is read from .env + prefixed env vars via internal/config (no os.Getenv outside internal/config)",
+        "Migrations are .sql files under internal/repository/migrations and are embedded (go:embed)",
+        "Makefile exists with build and release (cross-compile) targets",
+        "Comments are in Turkish, identifiers in English",
+        "DATABASE_URL uses postgres:// scheme and pgx driver",
+        "GET /{code} returns an HTTP redirect (301/302/307) and increments click count in repository",
+        "POST /links generates a unique short code and returns it as JSON",
+        "Duplicate short code handled via repository.IsUniqueViolation (no pgconn import)",
+        "No test-only SQLite driver or migrations/sqlite directory added to the Postgres project"
+      ]
+    }
+  ]
+}

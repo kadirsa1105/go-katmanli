@@ -1,0 +1,22 @@
+[Unit]
+Description=__APP__
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=__APP__
+Group=__APP__
+WorkingDirectory=/opt/__APP__
+# Ayarlar /opt/__APP__/.env dosyasından okunur (bkz. .env.example)
+ExecStart=/opt/__APP__/__APP__ serve
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/opt/__APP__/data
+
+[Install]
+WantedBy=multi-user.target

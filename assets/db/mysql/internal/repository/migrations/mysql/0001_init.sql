@@ -1,0 +1,11 @@
+-- İlk şema. Tabloları buraya ekle; sonraki değişiklikler için yeni dosya aç:
+--   ~/.claude/skills/go-katmanli/scripts/new_migration.sh <ad>
+--
+-- Örnek:
+-- CREATE TABLE notes (
+--     id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+--     title      VARCHAR(255) NOT NULL,
+--     body       TEXT NOT NULL,
+--     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -1,0 +1,11 @@
+-- İlk şema. Tabloları buraya ekle; sonraki değişiklikler için yeni dosya aç:
+--   ~/.claude/skills/go-katmanli/scripts/new_migration.sh <ad>
+--
+-- Örnek:
+-- CREATE TABLE notes (
+--     id         BIGSERIAL PRIMARY KEY,
+--     title      TEXT NOT NULL,
+--     body       TEXT NOT NULL DEFAULT '',
+--     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+-- );
