@@ -77,6 +77,9 @@ duyuluyorsa eksik olan bir service metodudur.
 - Komutlar: `<app> serve` (varsayılan) · `<app> migrate` · `<app> version` · `-env <dosya>`.
 - Derleme: `make build` / `make release` (linux, windows, darwin × amd64, arm64; `CGO_ENABLED=0`).
   Ayrıntı ve deploy: **references/build.md**.
+- Container dağıtımı (Coolify/Traefik): port, ağ, kalıcı volume, healthcheck, Shared Variables ile
+  ortak veritabanı bilgisi, Cloudflare/TLS tuzakları → **references/coolify.md**. İskeletteki
+  `COOLIFY.md` projeye özgü kurulum notudur; doldur, silme.
 
 Lehçe farkları (ID üretimi, tarih tipleri, RETURNING, SQLite tuzakları): **references/databases.md** — migration
 ya da repository yazarken ilgili bölümü oku; özellikle SQLite'ta tarih sütunu `DATETIME` olmalı, yoksa `time.Time` taranmaz.
@@ -101,5 +104,5 @@ ya da repository yazarken ilgili bölümü oku; özellikle SQLite'ta tarih sütu
 
 Yeni import eklediysen `go mod tidy` (go.sum eksikliği build'i düşürür). `gofmt -l .` boş,
 `go vet ./...` ve `go test ./...` temiz, `make build` geçiyor.
-Yeni ayar eklediysen `.env.example` güncel. Yeni endpoint eklediysen README'deki
-listeye bir satır ekle.
+Yeni ayar eklediysen `.env.example` güncel — panelden de girileceği için `COOLIFY.md`
+tablosuna aynı satırı ekle. Yeni endpoint eklediysen README'deki listeye bir satır ekle.

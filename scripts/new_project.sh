@@ -31,6 +31,11 @@ if ! [[ "$APP" =~ ^[a-z][a-z0-9_-]*$ ]]; then
 fi
 PREFIX=$(echo "$APP" | tr 'a-z-' 'A-Z_')
 
+# Dockerfile'daki derleyici sürümü go.mod'daki ile uyuşmalı; go.mod'u `go mod init`
+# yerel Go sürümüyle yazar, sabit bir etiket bırakılırsa image "requires go >= …" der.
+GOVER=$(go env GOVERSION 2>/dev/null | sed -n 's/^go\([0-9][0-9]*\.[0-9][0-9]*\).*/\1/p')
+[ -n "$GOVER" ] || GOVER=1.27
+
 case "$DB" in
     postgres) DATABASE_URL="postgres://$APP:$APP@127.0.0.1:5432/$APP?sslmode=disable" ;;
     mysql)    DATABASE_URL="mysql://$APP:$APP@127.0.0.1:3306/$APP" ;;
@@ -53,6 +58,7 @@ mkdir -p "$TARGET/data"
 find "$TARGET" -type f | while read -r f; do
     sed -i \
         -e "s|__DATABASE_URL__|$DATABASE_URL|g" \
+        -e "s|__GOVER__|$GOVER|g" \
         -e "s|__MODULE__|$MODULE|g" \
         -e "s|__PREFIX__|$PREFIX|g" \
         -e "s|__APP__|$APP|g" \

@@ -38,6 +38,8 @@ SQLite dosyası ya da başka yazılabilir yol gerekiyorsa `ReadWritePaths`'e ekl
 
 ## Docker
 
+Coolify/Traefik ile dağıtım (ortam değişkenleri, volume, healthcheck, domain): **coolify.md**.
+
 `Dockerfile` çok aşamalı: `golang:1.26-alpine` derler, `alpine` çalıştırır, root dışı
 kullanıcı. Konteyner içinde `LISTEN=0.0.0.0:8080` (ENV ile ayarlı); dışarıdan
 ayarlar `-e <PREFIX>_DATABASE_URL=...` ya da `--env-file .env` ile.
