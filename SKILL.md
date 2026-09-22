@@ -77,6 +77,9 @@ duyuluyorsa eksik olan bir service metodudur.
 - Komutlar: `<app> serve` (varsayılan) · `<app> migrate` · `<app> version` · `-env <dosya>`.
 - Derleme: `make build` / `make release` (linux, windows, darwin × amd64, arm64; `CGO_ENABLED=0`).
   Ayrıntı ve deploy: **references/build.md**.
+- Dağıtım dosyaları `deploy/` altında: `deploy/Dockerfile`, `deploy/systemd/<app>.service`,
+  `deploy/coolify.md`. Derleme `make docker-build` ya da `docker build -f deploy/Dockerfile .`.
+  Aynı ikili hem systemd hem container ile çalışır; ikisi de desteklenir.
 - Container dağıtımı (Coolify/Traefik): port, ağ, kalıcı volume, healthcheck, Shared Variables ile
   ortak veritabanı bilgisi, Cloudflare/TLS tuzakları → **references/coolify.md**. İskeletteki
   `COOLIFY.md` projeye özgü kurulum notudur; doldur, silme.

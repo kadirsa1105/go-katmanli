@@ -47,5 +47,8 @@ release:
 		CGO_ENABLED=0 GOOS=$$os GOARCH=$$arch go build -trimpath -ldflags '$(LDFLAGS)' -o "$$out" ./cmd/$(APP) || exit 1; \
 	done
 
+docker-build:
+	docker build -f deploy/Dockerfile -t $(APP) .
+
 clean:
 	rm -rf bin dist

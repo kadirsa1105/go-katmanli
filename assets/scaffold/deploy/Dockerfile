@@ -1,3 +1,7 @@
+# Derleme bağlamı proje kökü, Dockerfile deploy/ altında:
+#   docker build -f deploy/Dockerfile -t __APP__ .
+# Coolify: Build pipeline → Dockerfile location = /deploy/Dockerfile
+
 FROM golang:__GOVER__-alpine AS build
 WORKDIR /src
 COPY go.mod go.sum ./

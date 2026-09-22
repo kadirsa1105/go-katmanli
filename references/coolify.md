@@ -7,6 +7,8 @@ veritabanları ayrı bir projede paylaşımlı servis olarak duruyor.
 
 - New Resource → Private Repository (GitHub App ya da deploy key) → repo + branch.
 - Build Pack: **Dockerfile**. Nixpacks/Railpack seçme; repodaki Dockerfile derlensin.
+- **Dockerfile location: `/deploy/Dockerfile`** — dağıtım dosyaları kökte değil `deploy/` altındadır
+  (systemd unit'i de orada). Derleme bağlamı kök kalır.
 - Ports Exposes: uygulamanın **container içinde** dinlediği port (iskelette `8080`).
   Bu dışarı açılan port değil, Traefik'in hedefi; dışarısı her zaman 80/443.
 - Network: **Connect to the predefined Coolify network**. Aksi halde uygulama veritabanı

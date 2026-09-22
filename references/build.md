@@ -38,6 +38,9 @@ SQLite dosyası ya da başka yazılabilir yol gerekiyorsa `ReadWritePaths`'e ekl
 
 ## Docker
 
+Dockerfile `deploy/Dockerfile`'dadır; derleme bağlamı proje köküdür:
+`docker build -f deploy/Dockerfile -t <app> .` (ya da `make docker-build`).
+
 Coolify/Traefik ile dağıtım (ortam değişkenleri, volume, healthcheck, domain): **coolify.md**.
 
 `Dockerfile` çok aşamalı: `golang:1.26-alpine` derler, `alpine` çalıştırır, root dışı

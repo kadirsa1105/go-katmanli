@@ -17,6 +17,7 @@ FLUSH PRIVILEGES;
 |---|---|
 | Kaynak | Private Repository → bu repo, branch `main` |
 | Build Pack | **Dockerfile** |
+| Dockerfile location | **`/deploy/Dockerfile`** |
 | Ports Exposes | **8080** (container içi port; dışarısı 80/443) |
 | Network | **Connect to the predefined Coolify network** |
 | Domain | `__APP__.example.com` |
